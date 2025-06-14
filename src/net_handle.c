@@ -12,6 +12,7 @@ int create_proxy_socket(int port, struct sockaddr_in* address, socklen_t *addrle
     int opt = 1;
     int proxyFD = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     *addrlen = sizeof(*address);
+    printf("Size of addr: %d\n", *addrlen);
     if (proxyFD < 0) {
         printf("ERROR CREATING SOCKET\n");
         return 0;
@@ -27,7 +28,7 @@ int create_proxy_socket(int port, struct sockaddr_in* address, socklen_t *addrle
     address->sin_addr.s_addr = INADDR_ANY;
     address->sin_port = htons(port);
 
-    int binderr = bind(proxyFD, (struct sockaddr*)&address, *addrlen);
+    int binderr = bind(proxyFD, (struct sockaddr*)address, *addrlen);
     if (binderr < 0) {
         perror("bind");
         printf("ERROR BINDING SOCKET\n");

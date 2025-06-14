@@ -8,7 +8,7 @@ struct Connection {
     int mc_server_fd;
 };
 
-int startserver(int port, struct ServerList* server_list);
+int startproxy(int port, struct ServerList* server_list);
 void* acceptConection(void* args);
 int passconnection(int clientFD, struct Address outgoingaddress, char* msg, int msg_size);
 void* handlemc_client(void* args);
